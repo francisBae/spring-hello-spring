@@ -4,6 +4,11 @@ import hello.hellospring.domain.Member;
 import hello.hellospring.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
 
 //스프링 컨테이너는 controller 어노테이션이 있으면 해당되는 객체를 생성해서 스프링에 넣어두고 관리를 한다
 
@@ -25,6 +30,32 @@ public class MemberController {
     public MemberController(MemberService memberService) {
         this.memberService = memberService;
     }
+
+    //url에 /members/new 로 들어가면 get방식 수행
+    //members/createMemberForm.html 로 이동
+    @GetMapping("/members/new")
+    public String createForm(){
+        return "members/createMemberForm";
+    }
+
+    //url에 /members/new 로 들어가면 get방식 수행
+    @PostMapping("/members/new")
+    public String create(MemberForm form){
+        Member member = new Member();
+        member.setName(form.getName());
+
+        memberService.join(member);
+
+        return "redirect:/"; //홈 화면으로 다시
+    }
+
+    @GetMapping("/members")
+    public String list(Model model){
+        List<Member> members = memberService.findMembers();
+        model.addAttribute("members",members); //model에 추가하면 아래 return으로 같이 넘어감
+        return "members/memberList";
+    }
+
 }
 
 //DI 에는 생성자 주입방식, 셋터주입방식, 필드주입방식이 있다.

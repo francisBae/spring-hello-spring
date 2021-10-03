@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div class="container">
+    <div>
+        <table>
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>이름</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!--아래는 타임리프 엔진 사용한 케이스-->
+            <tr th:each="member : ${members}"> <!--members를 읽어서 th:each를 통해 루프를 돌고, 각 member에 대해 처리-->
+                <td th:text="${member.id}"></td> <!--getId 호출-->
+                <td th:text="${member.name}"></td> <!--getName 호출-->
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div> <!-- /container -->
+</body>
+</html>
