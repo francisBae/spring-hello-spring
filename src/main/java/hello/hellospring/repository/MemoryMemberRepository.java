@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository;
 import java.util.*;
 //import java.util.Optional;
 
-@Repository
 public class MemoryMemberRepository implements MemberRepository {
     private static Map<Long, Member> store = new HashMap<>(); //저장할 공간
     //실무에서는 동시성 문제가 있으므로 공유되는 변수는 concurrent hashmap 사용

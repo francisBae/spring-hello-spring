@@ -26,3 +26,8 @@ public class MemberController {
         this.memberService = memberService;
     }
 }
+
+//DI 에는 생성자 주입방식, 셋터주입방식, 필드주입방식이 있다.
+//생성자 주입이 가장 추천하는 방식
+//셋터주입 방식은 public으로 셋터 메소드가 선언되어있어야함. 그러면 누구나 호출 가능해서 권장X
+
