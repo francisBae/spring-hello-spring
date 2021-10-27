@@ -44,7 +44,12 @@ dependencies {
 
 	//db 연결을 위한 라이브러리 추가
 	//접속 정보는 applicatgion.properties 에 추가
-	implementation 'org.springframework.boot:spring-boot-starter-jdbc' //jdbc 드라이버
+//	implementation 'org.springframework.boot:spring-boot-starter-jdbc' //jdbc 드라이버
+	
+	//jdbc 대신 jpa를 사용해보기
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa' //jpa, jdbc 모두 포함
+	
+	
 	runtimeOnly 'com.h2database:h2' //db 제공하는 클라이언트
 
 }

@@ -1,14 +1,12 @@
 package hello.hellospring;
 
-import hello.hellospring.repository.JdbcMemberRepository;
-import hello.hellospring.repository.JdbcTemplateMemberRepository;
-import hello.hellospring.repository.MemberRepository;
-import hello.hellospring.repository.MemoryMemberRepository;
+import hello.hellospring.repository.*;
 import hello.hellospring.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.persistence.EntityManager;
 import javax.sql.DataSource;
 
 //Configuration, Bean 사용하면 컴포넌트 스캔, 자동의존관계 설정이 아닌
@@ -16,11 +14,18 @@ import javax.sql.DataSource;
 @Configuration
 public class SpringConfig {
 
-    private DataSource dataSource;
+//    private DataSource dataSource;
+//
+//    @Autowired //spring의 주입
+//    public SpringConfig(DataSource dataSource) {
+//        this.dataSource = dataSource;
+//    }
 
-    @Autowired //spring의 주입
-    public SpringConfig(DataSource dataSource) {
-        this.dataSource = dataSource;
+    private EntityManager em;
+
+    @Autowired
+    public SpringConfig(EntityManager em) {
+        this.em = em;
     }
 
     //스프링빈에 등록하라는 걸로 스프링이 인식
@@ -39,8 +44,11 @@ public class SpringConfig {
         OCP : Open-Closed Principle (개방-폐쇄 원칙 : 확장에는 열려있고, 수정 및 변경에는 닫혀 있다)
 
          */
-        return new JdbcTemplateMemberRepository(dataSource);
+//        return new JdbcTemplateMemberRepository(dataSource);
+
+        return new JpaMemeberRepository(em);
     }
+
 
 }
 

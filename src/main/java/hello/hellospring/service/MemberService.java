@@ -4,6 +4,7 @@ import hello.hellospring.domain.Member;
 import hello.hellospring.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,6 +13,7 @@ import java.util.Optional;
 //서비스는 비즈니스에서 가져온 용어들로 사용(의사소통의 원활함 위해)
 //서비스는 비즈니스 의존적으로 설계하고 repository는 개발 용어에 가깝게
 
+@Transactional //jpa는 transactional과 항상 붙어다녀야 함 / Transactional을 클래스에 걸어도 되고 대상 메소드에 걸어도 됨
 public class MemberService {
     //ctrl+shift+T 로 테스트 생성
 
