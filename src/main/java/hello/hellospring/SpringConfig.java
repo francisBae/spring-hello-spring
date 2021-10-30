@@ -21,22 +21,30 @@ public class SpringConfig {
 //        this.dataSource = dataSource;
 //    }
 
-    private EntityManager em;
+//    private EntityManager em;
+//
+//    @Autowired
+//    public SpringConfig(EntityManager em) {
+//        this.em = em;
+//    }
+
+    private final MemberRepository memberRepository;
 
     @Autowired
-    public SpringConfig(EntityManager em) {
-        this.em = em;
+    public SpringConfig(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
     }
+
 
     //스프링빈에 등록하라는 걸로 스프링이 인식
     @Bean
     public MemberService memberService(){
-        return new MemberService(memberRepository());
-
+//        return new MemberService(memberRepository());
+        return new MemberService(memberRepository); //의존 관계 셋팅 (스프링 데이터 jpa)
     }
 
-    @Bean
-    public MemberRepository memberRepository(){
+//    @Bean
+//    public MemberRepository memberRepository(){
 //        return new MemoryMemberRepository();
 //        return new JdbcMemberRepository(dataSource);
         //손쉽게 memory repository에서 전환 가능
@@ -46,8 +54,10 @@ public class SpringConfig {
          */
 //        return new JdbcTemplateMemberRepository(dataSource);
 
-        return new JpaMemeberRepository(em);
-    }
+        //JPA 사용
+//        return new JpaMemeberRepository(em);
+
+//    }
 
 
 }
