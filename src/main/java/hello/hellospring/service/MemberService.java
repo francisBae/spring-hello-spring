@@ -30,32 +30,25 @@ public class MemberService {
      */
         public Long join(Member member){
 
-            long start = System.currentTimeMillis();
 
-            try {
 
-                //같은 이름이 있는 중복 회원X
-                //        Optional<Member> result = memberRepository.findByName(member.getName());//끝에서 ctrl + alt + v
-                //        result.ifPresent(m->{
-                //            throw new IllegalStateException("이미 존재하는 회원입니다.");
-                //        }); //ifPresent:값이 있다면
+            //같은 이름이 있는 중복 회원X
+            //        Optional<Member> result = memberRepository.findByName(member.getName());//끝에서 ctrl + alt + v
+            //        result.ifPresent(m->{
+            //            throw new IllegalStateException("이미 존재하는 회원입니다.");
+            //        }); //ifPresent:값이 있다면
 
-                validateDuplicateMember(member);
-                //ctrl+shift+alt+T 후 extract method로 위 내용을 함수로 뽑아낸다(자주 호출될 예정이므로)
-                //extract method 바로 하려면 ctrl+shift+m
+            validateDuplicateMember(member);
+            //ctrl+shift+alt+T 후 extract method로 위 내용을 함수로 뽑아낸다(자주 호출될 예정이므로)
+            //extract method 바로 하려면 ctrl+shift+m
 
-                //        result.orElseGet("~~~") //값이 있으면 꺼내고 없으면 디폴트값 꺼냄
+            //        result.orElseGet("~~~") //값이 있으면 꺼내고 없으면 디폴트값 꺼냄
 
-                //optional 안에 멤버객체가 있음. optional로 감싸면 위의 ifPresent 같이 여러 메소드 사용 가능
-                //null이 있는 경우 optional로 감싸서 반환되면 ifPresent 통해 식별 가능
+            //optional 안에 멤버객체가 있음. optional로 감싸면 위의 ifPresent 같이 여러 메소드 사용 가능
+            //null이 있는 경우 optional로 감싸서 반환되면 ifPresent 통해 식별 가능
 
-                memberRepository.save(member);
-                return member.getId();
-            }finally{
-                long finish = System.currentTimeMillis();
-                long timeMs = finish - start;
-                System.out.println("join = "+timeMs+"ms");
-            }
+            memberRepository.save(member);
+            return member.getId();
 
         }
 
@@ -70,14 +63,7 @@ public class MemberService {
      * 전체 회원 조회
      */
     public List<Member> findMembers(){
-        long start = System.currentTimeMillis();
-        try{
-            return memberRepository.findAll();
-        }finally{
-            long finish = System.currentTimeMillis();
-            long timeMs = finish - start;
-            System.out.println("findMembers = "+timeMs+"ms");
-        }
+        return memberRepository.findAll();
     }
 
     public Optional<Member> findOne(Long memberId){

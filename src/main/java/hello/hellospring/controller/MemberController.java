@@ -28,7 +28,11 @@ public class MemberController {
     //memberService에서 사용하는 MemberRepository역시 @Repository 선언해주기
     @Autowired
     public MemberController(MemberService memberService) {
+
         this.memberService = memberService;
+        System.out.println("memberService = "+memberService.getClass());
+        //memberService = class hello.hellospring.service.MemberService$$EnhancerBySpringCGLIB$$9cbbca40
+        //=>memberService를 복제해서 코드 조작하는 기술을 쓴 것
     }
 
     //url에 /members/new 로 들어가면 get방식 수행
